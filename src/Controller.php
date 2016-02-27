@@ -112,7 +112,10 @@ class Controller
 
         $this->findPermissionByTable($GLOBALS['TL_DCA'][$table]['config']['ptable']);
         $this->parsePermissionByTable();
-        if ($this->autoPermission) {
+        if ($this->autoPermission
+            || !array_key_exists('ptable', $GLOBALS['TL_DCA'][$table]['config'])
+            || empty($GLOBALS['TL_DCA'][$table]['config']['ptable'])
+        ) {
             return;
         }
 
