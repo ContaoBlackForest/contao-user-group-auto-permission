@@ -1,0 +1,30 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/user-group-auto-permission/languages/en/default.php" source-language="en" target-language="en">
+    <body>
+      <trans-unit id="TL_RELATION_PERMISSION.tl_calendar">
+        <source>Calendar</source>
+      </trans-unit>
+      <trans-unit id="TL_RELATION_PERMISSION.tl_calendar_feed">
+        <source>Calendar</source>
+      </trans-unit>
+      <trans-unit id="TL_RELATION_PERMISSION.tl_calendar">
+        <source>Calendar</source>
+      </trans-unit>
+      <trans-unit id="TL_RELATION_PERMISSION.tl_form">
+        <source>Form</source>
+      </trans-unit>
+      <trans-unit id="TL_RELATION_PERMISSION.tl_faq_category">
+        <source>FAQ</source>
+      </trans-unit>
+      <trans-unit id="TL_RELATION_PERMISSION.tl_news_archive">
+        <source>News</source>
+      </trans-unit>
+      <trans-unit id="TL_RELATION_PERMISSION.tl_news_feed">
+        <source>News</source>
+      </trans-unit>
+      <trans-unit id="TL_RELATION_PERMISSION.tl_newsletter_channel">
+        <source>Newsletter</source>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

@@ -1,0 +1,22 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/user-group-auto-permission/languages/de/tl_user_group.php" source-language="en" target-language="de">
+    <body>
+      <trans-unit id="tl_user_group.autoPermission.0">
+        <source>Archiv permission</source>
+        <target>Archive Berechtigungen</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.autoPermission.1">
+        <source>Here you can select the archives, which this user group access is automatically always have to.</source>
+        <target>Hier kann man die Archive auswählen, die diese Benutzergruppe automatisch immer zugriff haben soll.</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.autoPermissionArchive">
+        <source>Archiv</source>
+        <target>Archive</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.autoPermission_legend">
+        <source>Auto permission</source>
+        <target>Automatische Berechtigungen</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
