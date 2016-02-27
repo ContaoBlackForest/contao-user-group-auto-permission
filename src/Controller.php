@@ -105,7 +105,7 @@ class Controller
     protected function findPermissionByParentTable($table)
     {
         if (($this->autoPermission)
-        || !array_key_exists('ptable', $GLOBALS['TL_DCA'][$table]['config'])
+            || !array_key_exists('ptable', $GLOBALS['TL_DCA'][$table]['config'])
         ) {
             return;
         }
