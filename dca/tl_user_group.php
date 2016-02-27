@@ -43,9 +43,6 @@ $fields = array(
                 )
             )
         ),
-        /*'save_callback' => array(
-            array('tl_page_l10n', 'validateLocalizations')
-        ),*/
         'sql'       => "blob NULL"
     )
 );
