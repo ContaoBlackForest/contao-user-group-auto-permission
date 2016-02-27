@@ -10,7 +10,7 @@
  * @copyright Copyright 2016 ContaoBlackForest
  */
 
-\Bit3\Contao\MetaPalettes\MetaPalettes::appendAfter(
+\MetaPalettes::appendAfter(
     'tl_user_group',
     'default',
     'title',
