@@ -43,6 +43,7 @@ class Controller
 
         if (!array_key_exists('controller', $GLOBALS)
             || $controller->User->isAdmin
+            || $controller->User->inherit === 'custom'
             || !array_key_exists('TL_RELATION_PERMISSION', $GLOBALS)
             || empty($GLOBALS['TL_RELATION_PERMISSION'])
         ) {
