@@ -10,25 +10,27 @@
  * @copyright Copyright 2016 ContaoBlackForest
  */
 
-\MetaPalettes::appendAfter(
-    'tl_user_group',
-    'default',
-    'title',
-    array(
-        'autoPermission' => array(':hide', 'autoPermission',),
-    )
-);
+foreach (array('extend', 'custom') as $palette) {
+    \MetaPalettes::appendAfter(
+        'tl_user',
+        $palette,
+        'groups',
+        array(
+            'autoPermission' => array(':hide', 'autoPermission',),
+        )
+    );
+}
 
 $fields = array(
     'autoPermission' => array(
-        'label'     => &$GLOBALS['TL_LANG']['tl_user_group']['autoPermission'],
+        'label'     => &$GLOBALS['TL_LANG']['tl_user']['autoPermission'],
         'exclude'   => true,
         'inputType' => 'multiColumnWizard',
         'eval'      => array(
             'tl_class'     => 'w50 autoheight',
             'columnFields' => array(
                 'archive' => array(
-                    'label'            => &$GLOBALS['TL_LANG']['tl_user_group']['autoPermissionArchive'],
+                    'label'            => &$GLOBALS['TL_LANG']['tl_user']['autoPermissionArchive'],
                     'exclude'          => true,
                     'inputType'        => 'select',
                     'options_callback' => array(
@@ -47,8 +49,8 @@ $fields = array(
     )
 );
 
-$GLOBALS['TL_DCA']['tl_user_group']['fields'] = array_merge(
-    $GLOBALS['TL_DCA']['tl_user_group']['fields'],
+$GLOBALS['TL_DCA']['tl_user']['fields'] = array_merge(
+    $GLOBALS['TL_DCA']['tl_user']['fields'],
     $fields
 );
 

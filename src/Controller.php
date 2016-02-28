@@ -62,25 +62,51 @@ class Controller
         }
 
         global $controller;
+        if ($controller->User->inherit === 'custom') {
+            $this->parsePermissionByUser();
+            return;
+        }
 
         $userGroupResult = \UserGroupModel::findMultipleByIds($controller->User->groups);
         if (!$userGroupResult) {
             return;
         }
 
+        $time = \Date::floorToMinute();
         while ($userGroupResult->next()) {
-            $chunks = deserialize($userGroupResult->autoPermission);
-            if (empty($chunks)) {
+            if ($userGroupResult->disable
+                || ($userGroupResult->start && $userGroupResult->start >= $time)
+                || ($userGroupResult->stop && $userGroupResult->stop <= $time + 60)
+            ) {
                 continue;
             }
 
-            foreach ($chunks as $chunk) {
-                if (!in_array($this->permissionField, array_values($chunk))) {
-                    continue;
-                }
+            $this->parsePermission(deserialize($userGroupResult->autoPermission));
+        }
+    }
 
-                $this->autoPermission = true;
+    protected function parsePermissionByUser()
+    {
+        global $controller;
+
+        $this->parsePermission($controller->User->autoPermission);
+    }
+
+    /**
+     * @param array $permissions
+     */
+    protected function parsePermission(array $permissions = array())
+    {
+        if (empty($permissions)) {
+            return;
+        }
+
+        foreach ($permissions as $permission) {
+            if (!in_array($this->permissionField, array_values($permission))) {
+                continue;
             }
+
+            $this->autoPermission = true;
         }
     }
 
@@ -105,14 +131,17 @@ class Controller
     protected function findPermissionByParentTable($table)
     {
         if (($this->autoPermission)
-        || !array_key_exists('ptable', $GLOBALS['TL_DCA'][$table]['config'])
+            || !array_key_exists('ptable', $GLOBALS['TL_DCA'][$table]['config'])
         ) {
             return;
         }
 
         $this->findPermissionByTable($GLOBALS['TL_DCA'][$table]['config']['ptable']);
         $this->parsePermissionByTable();
-        if ($this->autoPermission) {
+        if ($this->autoPermission
+            || !array_key_exists('ptable', $GLOBALS['TL_DCA'][$table]['config'])
+            || empty($GLOBALS['TL_DCA'][$table]['config']['ptable'])
+        ) {
             return;
         }
 
@@ -125,6 +154,12 @@ class Controller
              && !$this->permissionTable)
             || !$this->autoPermission
         ) {
+            return;
+        }
+
+        global $controller;
+        $permissionField = $this->permissionField;
+        if ($controller->User->$permissionField) {
             return;
         }
 
@@ -142,9 +177,6 @@ class Controller
         if (empty($permissions)) {
             return;
         }
-
-        global $controller;
-        $permissionField = $this->permissionField;
 
         $controller->User->$permissionField = $permissions;
     }
