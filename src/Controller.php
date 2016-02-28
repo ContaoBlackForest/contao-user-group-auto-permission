@@ -78,18 +78,25 @@ class Controller
                 continue;
             }
 
-            $chunks = deserialize($userGroupResult->autoPermission);
-            if (empty($chunks)) {
+            $this->parsePermission(deserialize($userGroupResult->autoPermission));
+        }
+    }
+
+    /**
+     * @param array $permissions
+     */
+    protected function parsePermission(array $permissions = array())
+    {
+        if (empty($permissions)) {
+            return;
+        }
+
+        foreach ($permissions as $permission) {
+            if (!in_array($this->permissionField, array_values($permission))) {
                 continue;
             }
 
-            foreach ($chunks as $chunk) {
-                if (!in_array($this->permissionField, array_values($chunk))) {
-                    continue;
-                }
-
-                $this->autoPermission = true;
-            }
+            $this->autoPermission = true;
         }
     }
 
