@@ -157,6 +157,12 @@ class Controller
             return;
         }
 
+        global $controller;
+        $permissionField = $this->permissionField;
+        if ($controller->User->$permissionField) {
+            return;
+        }
+
         /** @var \Model $permissionModel */
         $permissionModel  = \Model::getClassFromTable($this->permissionTable);
         $permissionResult = $permissionModel::findAll();
@@ -171,9 +177,6 @@ class Controller
         if (empty($permissions)) {
             return;
         }
-
-        global $controller;
-        $permissionField = $this->permissionField;
 
         $controller->User->$permissionField = $permissions;
     }
