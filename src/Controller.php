@@ -68,7 +68,15 @@ class Controller
             return;
         }
 
+        $time = \Date::floorToMinute();
         while ($userGroupResult->next()) {
+            if ($userGroupResult->disable
+                || ($userGroupResult->start && $userGroupResult->start >= $time)
+                || ($userGroupResult->stop && $userGroupResult->stop <= $time + 60)
+            ) {
+                continue;
+            }
+
             $chunks = deserialize($userGroupResult->autoPermission);
             if (empty($chunks)) {
                 continue;
