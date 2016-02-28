@@ -43,7 +43,6 @@ class Controller
 
         if (!array_key_exists('controller', $GLOBALS)
             || $controller->User->isAdmin
-            || $controller->User->inherit === 'custom'
             || !array_key_exists('TL_RELATION_PERMISSION', $GLOBALS)
             || empty($GLOBALS['TL_RELATION_PERMISSION'])
         ) {
@@ -63,6 +62,10 @@ class Controller
         }
 
         global $controller;
+        if ($controller->User->inherit === 'custom') {
+            $this->parsePermissionByUser();
+            return;
+        }
 
         $userGroupResult = \UserGroupModel::findMultipleByIds($controller->User->groups);
         if (!$userGroupResult) {
@@ -80,6 +83,13 @@ class Controller
 
             $this->parsePermission(deserialize($userGroupResult->autoPermission));
         }
+    }
+
+    protected function parsePermissionByUser()
+    {
+        global $controller;
+
+        $this->parsePermission($controller->User->autoPermission);
     }
 
     /**
