@@ -10,6 +10,15 @@
       <trans-unit id="tl_user.autoPermissionArchive">
         <source>Archiv</source>
       </trans-unit>
+      <trans-unit id="tl_user.autoModulePermission.0">
+        <source>Module group permission</source>
+      </trans-unit>
+      <trans-unit id="tl_user.autoModulePermission.1">
+        <source>Here you can select the module group, which this user access is automatically always have to.</source>
+      </trans-unit>
+      <trans-unit id="tl_user.autoPermissionModule">
+        <source>Module group</source>
+      </trans-unit>
       <trans-unit id="tl_user.autoPermission_legend">
         <source>Auto permission</source>
       </trans-unit>

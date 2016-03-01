@@ -13,6 +13,18 @@
         <source>Archiv</source>
         <target>Archive</target>
       </trans-unit>
+      <trans-unit id="tl_user.autoModulePermission.0">
+        <source>Module group permission</source>
+        <target>Modulegruppen Berechtigungen</target>
+      </trans-unit>
+      <trans-unit id="tl_user.autoModulePermission.1">
+        <source>Here you can select the module group, which this user access is automatically always have to.</source>
+        <target>Hier kann man die Modulegruppen auswählen, die dieser Benutzer automatisch immer zugriff haben soll.</target>
+      </trans-unit>
+      <trans-unit id="tl_user.autoPermissionModule">
+        <source>Module group</source>
+        <target>Modulegruppe</target>
+      </trans-unit>
       <trans-unit id="tl_user.autoPermission_legend">
         <source>Auto permission</source>
         <target>Automatische Berechtigungen</target>
