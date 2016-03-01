@@ -15,6 +15,11 @@ $GLOBALS['TL_HOOKS']['loadDataContainer'][] = array(
     'setAutoPermission'
 );
 
+$GLOBALS['TL_HOOKS']['postAuthenticate'][] = array(
+    'ContaoBlackForest\User\Group\Permission\Controller',
+    'setModulePermission'
+);
+
 /**
  * Auto permission settings
  *
