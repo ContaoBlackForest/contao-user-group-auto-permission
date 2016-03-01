@@ -256,7 +256,6 @@ class Controller
                 continue;
             }
 
-            $issetModule = false;
             $backendModuleGroupName = key($backendModules[$permission['module']]);
             foreach ($backendModules[$permission['module']] as $name => $module) {
                 $this->permissionModule[$backendModuleGroupName] = $backendModules[$permission['module']];
