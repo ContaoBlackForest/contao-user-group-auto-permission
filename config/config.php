@@ -10,9 +10,15 @@
  * @copyright Copyright 2016 ContaoBlackForest
  */
 
+// Todo refactor this hook method for postAuthenticate hook.
 $GLOBALS['TL_HOOKS']['loadDataContainer'][] = array(
     'ContaoBlackForest\User\Group\Permission\Controller',
     'setAutoPermission'
+);
+
+$GLOBALS['TL_HOOKS']['postAuthenticate'][] = array(
+    'ContaoBlackForest\User\Group\Permission\Controller',
+    'setModulePermission'
 );
 
 /**
@@ -26,11 +32,11 @@ $GLOBALS['TL_HOOKS']['loadDataContainer'][] = array(
  * This makes available by user group edit mask.
  */
 $GLOBALS['TL_RELATION_PERMISSION'] = array(
-    'calendars' => 'tl_calendar',
+    'calendars'     => 'tl_calendar',
     'calendarfeeds' => 'tl_calendar_feed',
-    'forms' => 'tl_form',
-    'faqs' => 'tl_faq_category',
-    'news' => 'tl_news_archive',
-    'newsfeeds' => 'tl_news_feed',
-    'newsletters' => 'tl_newsletter_channel',
+    'forms'         => 'tl_form',
+    'faqs'          => 'tl_faq_category',
+    'news'          => 'tl_news_archive',
+    'newsfeeds'     => 'tl_news_feed',
+    'newsletters'   => 'tl_newsletter_channel',
 );

@@ -15,12 +15,12 @@
     'default',
     'title',
     array(
-        'autoPermission' => array(':hide', 'autoPermission',),
+        'autoPermission' => array(':hide', 'autoPermission', 'autoModulePermission',),
     )
 );
 
 $fields = array(
-    'autoPermission' => array(
+    'autoPermission'       => array(
         'label'     => &$GLOBALS['TL_LANG']['tl_user_group']['autoPermission'],
         'exclude'   => true,
         'inputType' => 'multiColumnWizard',
@@ -44,7 +44,32 @@ $fields = array(
             )
         ),
         'sql'       => "blob NULL"
-    )
+    ),
+    'autoModulePermission' => array(
+        'label'     => &$GLOBALS['TL_LANG']['tl_user_group']['autoModulePermission'],
+        'exclude'   => true,
+        'inputType' => 'multiColumnWizard',
+        'eval'      => array(
+            'tl_class'     => 'w50 autoheight',
+            'columnFields' => array(
+                'module' => array(
+                    'label'            => &$GLOBALS['TL_LANG']['tl_user_group']['autoPermissionModule'],
+                    'exclude'          => true,
+                    'inputType'        => 'select',
+                    'options_callback' => array(
+                        'ContaoBlackForest\User\Group\Permission\DataContainer\OptionsBuilder',
+                        'getModulePermissionOptions'
+                    ),
+                    'eval'             => array(
+                        'style'              => 'width:250px',
+                        'chosen'             => true,
+                        'includeBlankOption' => true
+                    )
+                )
+            )
+        ),
+        'sql'       => "blob NULL"
+    ),
 );
 
 $GLOBALS['TL_DCA']['tl_user_group']['fields'] = array_merge(

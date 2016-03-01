@@ -40,4 +40,21 @@ class OptionsBuilder
 
         return $options;
     }
+
+    /**
+     * @param \MultiColumnWizard $wizard
+     *
+     * @return array
+     */
+    public function getModulePermissionOptions(\MultiColumnWizard $wizard)
+    {
+        $options = array();
+
+        foreach (array_keys($GLOBALS['BE_MOD']) as $moduleName) {
+            $options[$moduleName] = $GLOBALS['TL_LANG']['MOD'][$moduleName];
+            echo "";
+        }
+
+        return $options;
+    }
 }

@@ -35,13 +35,24 @@ class Controller
     protected $autoPermission = false;
 
     /**
+     * @var null
+     */
+    protected $backendUser = null;
+
+    /**
+     * @var array
+     */
+    protected $permissionModule = array();
+
+    /**
      * @param $table
      */
     public function setAutoPermission($table)
     {
         global $controller;
 
-        if (!array_key_exists('controller', $GLOBALS)
+        if (TL_MODE != 'BE'
+            || !$controller
             || $controller->User->isAdmin
             || !array_key_exists('TL_RELATION_PERMISSION', $GLOBALS)
             || empty($GLOBALS['TL_RELATION_PERMISSION'])
@@ -179,5 +190,102 @@ class Controller
         }
 
         $controller->User->$permissionField = $permissions;
+    }
+
+    /**
+     * @param \BackendUser $user
+     */
+    public function setModulePermission(\BackendUser &$user)
+    {
+        if ($user->isAdmin) {
+            return;
+        }
+
+        $this->backendUser = &$user;
+        $this->parseModulePermissionByUserGroup();
+        $this->parseModulePermissionByUser();
+        $this->setModulePermissionToUser();
+    }
+
+    protected function parseModulePermissionByUserGroup()
+    {
+        if ($this->backendUser->inherit === 'custom') {
+            return;
+        }
+
+        $userGroupResult = \UserGroupModel::findMultipleByIds($this->backendUser->groups);
+        if (!$userGroupResult) {
+            return;
+        }
+
+        $time = \Date::floorToMinute();
+        while ($userGroupResult->next()) {
+            if ($userGroupResult->disable
+                || ($userGroupResult->start && $userGroupResult->start >= $time)
+                || ($userGroupResult->stop && $userGroupResult->stop <= $time + 60)
+            ) {
+                continue;
+            }
+
+            $this->parseModulePermission(deserialize($userGroupResult->autoModulePermission));
+        }
+    }
+
+    protected function parseModulePermissionByUser()
+    {
+        if ($this->backendUser->inherit !== 'custom') {
+            return;
+        }
+
+        $this->parseModulePermission(deserialize($this->backendUser->autoModulePermission));
+    }
+
+    /**
+     * @param array $permissions
+     */
+    protected function parseModulePermission(array $permissions = array())
+    {
+        if (empty($permissions)) {
+            return;
+        }
+
+        $backendModules = $GLOBALS['BE_MOD'];
+        foreach ($permissions as $permission) {
+            if (empty($permission['module'])
+                || !array_key_exists($permission['module'], $backendModules)
+            ) {
+                continue;
+            }
+
+            $backendModuleGroupName = key($backendModules[$permission['module']]);
+            foreach ($backendModules[$permission['module']] as $name => $module) {
+                $this->permissionModule[$backendModuleGroupName] = $backendModules[$permission['module']];
+            }
+        }
+    }
+
+    protected function setModulePermissionToUser()
+    {
+        if (empty($this->permissionModule)) {
+            return;
+        }
+
+        $userBackendModules = $this->backendUser->modules;
+
+        $modulesToUser = array();
+        foreach ($this->permissionModule as $name => $module) {
+            $different = array_diff_key(array_flip(array_keys($module)), array_flip($this->backendUser->modules));
+            if (count($module) - count($different)) {
+                continue;
+            }
+            $foo = $this->backendUser->modules;
+            /*if (in_array($name, $foo)) {
+                continue;
+            }*/
+
+            $userBackendModules = array_merge($userBackendModules, array_keys($module));
+        }
+
+        $this->backendUser->modules = $userBackendModules;
     }
 }
