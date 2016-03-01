@@ -10,6 +10,7 @@
  * @copyright Copyright 2016 ContaoBlackForest
  */
 
+// Todo refactor this hook method for postAuthenticate hook.
 $GLOBALS['TL_HOOKS']['loadDataContainer'][] = array(
     'ContaoBlackForest\User\Group\Permission\Controller',
     'setAutoPermission'

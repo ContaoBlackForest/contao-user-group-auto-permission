@@ -51,7 +51,8 @@ class Controller
     {
         global $controller;
 
-        if (!array_key_exists('controller', $GLOBALS)
+        if (TL_MODE != 'BE'
+            || !$controller
             || $controller->User->isAdmin
             || !array_key_exists('TL_RELATION_PERMISSION', $GLOBALS)
             || empty($GLOBALS['TL_RELATION_PERMISSION'])
