@@ -12,7 +12,7 @@
 
 ClassLoader::addClasses(
     array(
-        'ContaoBlackForest\User\Group\Permission\Controller' => 'system/modules/user-group-auto-permission/src/Controller.php',
+        'ContaoBlackForest\User\Group\Permission\Controller'                   => 'system/modules/user-group-auto-permission/src/Controller.php',
         'ContaoBlackForest\User\Group\Permission\DataContainer\OptionsBuilder' => 'system/modules/user-group-auto-permission/src/DataContainer/OptionsBuilder.php',
     )
 );

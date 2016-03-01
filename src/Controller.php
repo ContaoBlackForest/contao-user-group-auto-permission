@@ -275,7 +275,7 @@ class Controller
         $modulesToUser = array();
         foreach ($this->permissionModule as $name => $module) {
             $different = array_diff_key(array_flip(array_keys($module)), array_flip($this->backendUser->modules));
-            if (count($module) - count($different) ) {
+            if (count($module) - count($different)) {
                 continue;
             }
             $foo = $this->backendUser->modules;

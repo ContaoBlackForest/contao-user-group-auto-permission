@@ -32,11 +32,11 @@ $GLOBALS['TL_HOOKS']['postAuthenticate'][] = array(
  * This makes available by user group edit mask.
  */
 $GLOBALS['TL_RELATION_PERMISSION'] = array(
-    'calendars' => 'tl_calendar',
+    'calendars'     => 'tl_calendar',
     'calendarfeeds' => 'tl_calendar_feed',
-    'forms' => 'tl_form',
-    'faqs' => 'tl_faq_category',
-    'news' => 'tl_news_archive',
-    'newsfeeds' => 'tl_news_feed',
-    'newsletters' => 'tl_newsletter_channel',
+    'forms'         => 'tl_form',
+    'faqs'          => 'tl_faq_category',
+    'news'          => 'tl_news_archive',
+    'newsfeeds'     => 'tl_news_feed',
+    'newsletters'   => 'tl_newsletter_channel',
 );

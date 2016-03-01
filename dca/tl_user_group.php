@@ -20,7 +20,7 @@
 );
 
 $fields = array(
-    'autoPermission' => array(
+    'autoPermission'       => array(
         'label'     => &$GLOBALS['TL_LANG']['tl_user_group']['autoPermission'],
         'exclude'   => true,
         'inputType' => 'multiColumnWizard',

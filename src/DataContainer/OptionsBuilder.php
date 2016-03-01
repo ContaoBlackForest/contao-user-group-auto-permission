@@ -40,6 +40,7 @@ class OptionsBuilder
 
         return $options;
     }
+
     /**
      * @param \MultiColumnWizard $wizard
      *
