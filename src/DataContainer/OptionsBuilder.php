@@ -50,7 +50,6 @@ class OptionsBuilder
     {
         $options = array();
 
-        $activeModules = \ModuleLoader::getActive();
         foreach (array_keys($GLOBALS['BE_MOD']) as $moduleName) {
             $options[$moduleName] = $GLOBALS['TL_LANG']['MOD'][$moduleName];
             echo "";
