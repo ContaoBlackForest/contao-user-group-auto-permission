@@ -60,6 +60,12 @@ class Controller
             return;
         }
 
+        if ($table === 'tl_calendar_events') {
+            if (in_array('calendar_extended', \ModuleLoader::getActive())) {
+                \Controller::loadDataContainer('tl_form');
+            }
+        }
+
         $this->findPermissionByTable($table);
         $this->parsePermissionByTable();
         $this->findPermissionByParentTable($table);
